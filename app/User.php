@@ -16,6 +16,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject as JWTSubject;
  * @property string $image
  * @property string $code
  * @property string $displayName
+ * @property int $city_id
+ * @property int $country_id
  * @property string $updated_at
  * @property string $created_at
  * @property BookWash[] $bookWashes
@@ -48,7 +50,7 @@ class User extends Authenticatable implements JWTSubject
     /**
      * @var array
      */
-    protected $fillable = ['email', 'password', 'firstname', 'lastname', 'isOwner', 'image', 'code', 'displayName', 'updated_at', 'created_at'];
+    protected $fillable = ['email', 'password', 'firstname', 'lastname', 'isOwner', 'image', 'code', 'displayName','city_id', 'country_id', 'updated_at', 'created_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

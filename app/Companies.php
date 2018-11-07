@@ -75,7 +75,7 @@ class Companies extends Model
             ->join('countries', 'countries.id', '=', 'companies.country_id')
             ->join('cities', 'cities.country_id', '=', 'countries.id')
             ->join('working_times', 'working_times.company_id', '=', 'companies.id')
-            ->where('companies.city_id','=',$cityId)
+            ->where('cities.id','=',$cityId)
             ->get();
 
         foreach ($allCompanies as $companyObjectsArray){
