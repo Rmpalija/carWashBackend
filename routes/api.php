@@ -75,5 +75,12 @@ Route::group(['middleware'=> 'jwt.auth'],function(){
 
 });
 
+Route::group(['middleware'=> 'jwt.auth'],function(){
+
+    //Statistic Routes
+    Route::post('statistics','StatisticController@show');
+
+});
+
 
 Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh');

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property int $id
@@ -73,9 +74,9 @@ class Companies extends Model
            'cities.name as city',
            'working_times.*')
             ->join('countries', 'countries.id', '=', 'companies.country_id')
-            ->join('cities', 'cities.country_id', '=', 'countries.id')
+            ->join('cities', 'cities.id', '=', 'companies.city_id')
             ->join('working_times', 'working_times.company_id', '=', 'companies.id')
-            ->where('cities.id','=',$cityId)
+            ->where('companies.city_id','=',$cityId)
             ->get();
 
         foreach ($allCompanies as $companyObjectsArray){
@@ -91,6 +92,18 @@ class Companies extends Model
         }
 
         return $allCompanies;
+
+    }
+
+    public function getStatistic($staticData) {
+
+        $statistics = DB::table('book_washes')
+            ->select(DB::raw('COUNT(*) as bookings, MONTH(date) as month'))
+            ->whereYear('date', '=', $staticData['year'])
+            ->groupby('month')
+            ->get();
+
+        return $statistics;
 
     }
 
@@ -111,13 +124,14 @@ class Companies extends Model
             'cities.name as city',
             'companies.longLat',
             'companies.description',
+            'offers.id',
             'offers.name as offerName',
             'offers.description as description',
             'offers.price as price',
             'offers.price as time')
             ->join('offers', 'offers.company_id', '=', 'companies.id')
             ->join('countries', 'countries.id', '=', 'companies.country_id')
-            ->join('cities', 'cities.country_id', '=', 'countries.id')
+            ->join('cities', 'cities.id', '=', 'companies.city_id')
             ->where('companies.id', '=', $id)->get();
 
         return $companyOffers;

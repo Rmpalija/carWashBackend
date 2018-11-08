@@ -59,7 +59,7 @@ class CompanyController extends Controller
 
         if ($offerForCompany)
         {
-            return response()->json(['status'=>'success','companyOffer'=>$offerForCompany],200);
+            return response()->json(['status'=>'success','companyOffer'=> $offerForCompany],200);
         }
         return response()->json(['status'=>'failed','message'=>'Company with this Id dose not exist!'],404);
     }
