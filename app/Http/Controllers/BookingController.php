@@ -55,7 +55,7 @@ class BookingController extends Controller
             'book_washes.vehicleModel')
             ->join('companies', 'companies.id', '=', 'book_washes.company_id')
             ->where('user_id','=',$id)
-            ->orderBy('book_washes.date', 'DESC')
+            ->orderBy('book_washes.book_status', 'ASC')
             ->get();
 
 

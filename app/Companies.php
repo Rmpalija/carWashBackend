@@ -92,7 +92,6 @@ class Companies extends Model
         }
 
         return $allCompanies;
-
     }
 
     public function getStatistic($staticData) {
