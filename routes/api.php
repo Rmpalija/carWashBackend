@@ -65,7 +65,7 @@ Route::group(['middleware'=> 'jwt.auth'],function(){
 
 Route::group(['middleware'=> 'jwt.auth'],function(){
 
-    //Offer Routes
+    //Booking Routes
     Route::post('booking','BookingController@create');
     Route::get('booking/{id}','BookingController@showUserBookings');
     Route::get('bookingOwner/{id}','BookingController@showOwnerBookings');
@@ -79,6 +79,13 @@ Route::group(['middleware'=> 'jwt.auth'],function(){
 
     //Statistic Routes
     Route::post('statistics','StatisticController@show');
+
+});
+
+Route::group(['middleware'=> 'jwt.auth'],function(){
+
+    //Details Routes
+    Route::get('userDetails','InfoController@getUserDetails');
 
 });
 
