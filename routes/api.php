@@ -89,5 +89,12 @@ Route::group(['middleware'=> 'jwt.auth'],function(){
 
 });
 
+Route::group(['middleware'=> 'jwt.auth'],function(){
+
+    //User Routes
+    Route::post('updateUser','UserController@update');
+
+});
+
 
 Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh');
