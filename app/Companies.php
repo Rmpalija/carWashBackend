@@ -96,11 +96,13 @@ class Companies extends Model
 
     public function getStatistic($staticData) {
 
+
         if($staticData['status'] === -1){
             $statistics = DB::table('book_washes')
                 ->select(DB::raw('COUNT(*) as bookings, MONTH(date) as month'))
                 ->whereYear('date', '=', $staticData['year'])
                 ->groupby('month')
+                ->where('company_id','=', $staticData['companyId'])
                 ->get();
             return $statistics;
         }
@@ -109,6 +111,7 @@ class Companies extends Model
             ->select(DB::raw('COUNT(*) as bookings, MONTH(date) as month'))
             ->whereYear('date', '=', $staticData['year'])
             ->where('book_status','=', $staticData['status'])
+            ->where('company_id','=', $staticData['companyId'])
             ->groupby('month')
             ->get();
 

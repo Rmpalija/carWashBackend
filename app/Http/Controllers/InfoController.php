@@ -37,6 +37,7 @@ class InfoController extends Controller
             ->get();
 
         $userCompanies =  Companies::select('companies.name as company',
+            'companies.id as companyId',
             'countries.name as country',
             'cities.name as city')
             ->join('countries', 'countries.id', '=', 'companies.country_id')

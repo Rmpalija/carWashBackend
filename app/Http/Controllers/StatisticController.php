@@ -11,7 +11,7 @@ class StatisticController extends Controller
 
         $companieModel = new Companies();
 
-        $statisticData = $request->only('userId', 'year', 'status');
+        $statisticData = $request->only('userId', 'year', 'status', 'companyId');
 
         $statistic = $companieModel->getStatistic($statisticData);
 
