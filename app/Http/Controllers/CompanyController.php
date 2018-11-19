@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Companies;
 use App\Http\Requests\CreateCompany;
 use App\User;
+use App\UserCompanies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -41,6 +42,13 @@ class CompanyController extends Controller
         $input['owner_id'] = Auth::user()->id;
 
         $newCompany = Companies::create($input);
+
+        $inputUserCompanies= [
+            "user_id"=> $input['owner_id'],
+            "company_id"=> $newCompany->id
+        ];
+
+        UserCompanies::create($inputUserCompanies);
 
         return response()->json(['status'=>'success','company_id'=>$newCompany->id],200);
     }
