@@ -325,3 +325,27 @@ CREATE TABLE IF NOT EXISTS `carwash`.`working_times` (
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Data for table `carwash`.`countries`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `carwash`;
+INSERT INTO `carwash`.`countries` (`id`, `name`, `created_at`, `updated_at`) VALUES (1, 'Serbia', NULL, NULL);
+INSERT INTO `carwash`.`countries` (`id`, `name`, `created_at`, `updated_at`) VALUES (2, 'Bosnia', NULL, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `carwash`.`cities`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `carwash`;
+INSERT INTO `carwash`.`cities` (`id`, `name`, `longLat`, `country_id`, `created_at`, `updated_at`) VALUES (NULL, 'Banja Luka', NULL, 2, NULL, NULL);
+INSERT INTO `carwash`.`cities` (`id`, `name`, `longLat`, `country_id`, `created_at`, `updated_at`) VALUES (NULL, 'Beograd', NULL, 1, NULL, NULL);
+INSERT INTO `carwash`.`cities` (`id`, `name`, `longLat`, `country_id`, `created_at`, `updated_at`) VALUES (NULL, 'Gradiska', NULL, 2, NULL, NULL);
+INSERT INTO `carwash`.`cities` (`id`, `name`, `longLat`, `country_id`, `created_at`, `updated_at`) VALUES (NULL, 'Novi Sad', NULL, 1, NULL, NULL);
+
+COMMIT;
+
