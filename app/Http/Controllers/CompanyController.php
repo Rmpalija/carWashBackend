@@ -6,6 +6,7 @@ use App\Companies;
 use App\Http\Requests\CreateCompany;
 use App\User;
 use App\UserCompanies;
+use App\WorkingTimes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -134,5 +135,33 @@ class CompanyController extends Controller
 
         return response()->json(['status'=>'success','companies'=>$ownerompanies], 200);
 
+    }
+    public function saveCompanyTime(Request $request) {
+
+        $input = $request->all();
+
+
+        $inputCompaniesTime= [
+            "company_id" => $input['companyId'],
+            "monday"=> $input['mondayStartTime']['hour'].':'.$input['mondayStartTime']['minute'].'-'.$input['mondayEndTime']['hour'].':'.$input['mondayEndTime']['minute'],
+            "tuesday"=> $input['tuesdayStartTime']['hour'].':'.$input['tuesdayStartTime']['minute'].'-'.$input['tuesdayEndTime']['hour'].':'.$input['tuesdayEndTime']['minute'],
+            "wednesday"=> $input['wednesdayStartTime']['hour'].':'.$input['wednesdayStartTime']['minute'].'-'.$input['wednesdayEndTime']['hour'].':'.$input['wednesdayEndTime']['minute'],
+            "thursday"=> $input['thursdayStartTime']['hour'].':'.$input['thursdayStartTime']['minute'].'-'.$input['thursdayEndTime']['hour'].':'.$input['thursdayEndTime']['minute'],
+            "friday"=> $input['fridayStartTime']['hour'].':'.$input['fridayStartTime']['minute'].'-'.$input['fridayEndTime']['hour'].':'.$input['fridayEndTime']['minute'],
+            "saturday"=> $input['saturdayStartTime']['hour'].':'.$input['saturdayStartTime']['minute'].'-'.$input['saturdayEndTime']['hour'].':'.$input['saturdayEndTime']['minute'],
+            "sunday"=> $input['sundayStartTime']['hour'].':'.$input['sundayStartTime']['minute'].'-'.$input['sundayEndTime']['hour'].':'.$input['sundayEndTime']['minute']
+        ];
+
+        $time = WorkingTimes::where('company_id',$input['companyId'])->get();
+
+
+        if(count($time->all()) === 0){
+            WorkingTimes::create($inputCompaniesTime);
+        }else{
+            WorkingTimes::where('company_id','=',$input['companyId'])->update($inputCompaniesTime);
+        }
+
+
+        return response()->json(['status'=>'success','time'=>$inputCompaniesTime], 200);
     }
 }

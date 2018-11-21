@@ -96,5 +96,12 @@ Route::group(['middleware'=> 'jwt.auth'],function(){
 
 });
 
+Route::group(['middleware'=> 'jwt.auth'],function(){
+
+    //User-companies Routes
+    Route::post('company-time','CompanyController@saveCompanyTime');
+
+});
+
 
 Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh');

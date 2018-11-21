@@ -67,6 +67,8 @@ class BookingController extends Controller
 
         $user = User::find($user_id)->toArray();
 
+
+
         if($user['isOwner']){
             $companyIds = UserCompanies::where('user_id','=', $user['id'])->pluck('company_id');
 
